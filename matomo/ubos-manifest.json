@@ -1,0 +1,106 @@
+{
+    "type" : "app",
+
+    "roles" : {
+        "apache2" : {
+            "defaultcontext" : "/matomo",
+            "depends" : [
+                "php",
+                "php-apache",
+                "php-gd"
+            ],
+            "apache2modules" : [
+                "php7"
+            ],
+            "phpmodules" : [
+                "gd",
+                "iconv",
+                "mysqli"
+            ],
+            "appconfigitems" : [
+                {
+                    "type" : "directorytree",
+                    "names" : [
+                        "bower.json",
+                        "CHANGELOG.md",
+                        "composer.json",
+                        "composer.lock",
+                        "config",
+                        "console",
+                        "CONTRIBUTING.md",
+                        "core",
+                        "index.php",
+                        "js",
+                        "lang",
+                        "LEGALNOTICE",
+                        "libs",
+                        "LICENSE",
+                        "misc",
+                        "piwik.js",
+                        "piwik.php",
+                        "plugins",
+                        "PRIVACY.md",
+                        "README.md",
+                        "SECURITY.md",
+                        "tests",
+                        "vendor"
+                    ],
+                    "source" : "$1",
+                },
+                {
+                    "type" : "directory",
+                    "name" : "${appconfig.datadir}"
+                },
+                {
+                    "type"  : "directory",
+                    "name"  : "tmp",
+                    "uname" : "${apache2.uname}",
+                    "gname" : "${apache2.gname}"
+                },
+                {
+                    "type"   : "perlscript",
+                    "source" : "bin/generate-config.pl"
+                }
+            ],
+            "installers" : [
+                {
+                    "type"   : "perlscript",
+                    "source" : "bin/init-db.pl"
+                },
+                {
+                    "type"   : "perlscript",
+                    "source" : "bin/upgrade.pl"
+                }
+            ],
+            "upgraders" : [
+                {
+                    "type"   : "perlscript",
+                    "source" : "bin/upgrade.pl"
+                }
+            ]
+        },
+        "mysql" : {
+            "appconfigitems" : [
+                {
+                    "type"       : "database",
+                    "name"       : "maindb",
+                    "retentionpolicy"  : "keep",
+                    "retentionbucket"  : "maindb",
+                    "privileges" : "index, create, select, insert, update, delete, alter, lock tables, drop"
+                }
+            ]
+        }
+    },
+    "customizationpoints" : {
+        "salt" : {
+            "type"        : "string",
+            "required"    : false,
+            "private"     : true,
+            "default" : {
+                "expression" : "${randomHex(32)}"
+            }
+        }
+    }
+}
+
+

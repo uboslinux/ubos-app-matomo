@@ -1,0 +1,4 @@
+src/
+pkg/
+matomo-*.tar.gz
+matomo-*.pkg*

@@ -1,0 +1,41 @@
+developer=https://matomo.org/
+url=${developer}
+maintainer=http://indiecomputing.com/
+pkgname=$(basename $(pwd))
+_majorpkgver=1.30
+pkgver=3.6.0
+pkgrel=1
+pkgdesc="Analytics platform"
+arch=('any')
+license=("GPL3")
+source=("https://builds.piwik.org/matomo-${pkgver}.tar.gz")
+releasepage=("https://builds.piwik.org/?C=M;O=D")
+depends=(
+    'php'
+)
+options=('!strip')
+sha512sums=('02e2f52fe32bb891ecd2c3c381c8f325be46c36eef7be30be3abc92ffd2c753660ce4c3e2000881eef42545c804d0009b7f02663f2d9538558b16e06a1fe84d1')
+
+package() {
+# Manifest
+    install -D -m644 ${startdir}/ubos-manifest.json ${pkgdir}/ubos/lib/ubos/manifests/${pkgname}.json
+
+# Icons
+#    install -D -m644 ${startdir}/appicons/{72x72,144x144}.png -t ${pkgdir}/ubos/http/_appicons/${pkgname}/
+
+# Code
+   install -D -m755 ${startdir}/bin/*.pl -t ${pkgdir}/ubos/share/${pkgname}/bin/
+
+# Templates
+#   install -D -m644 ${startdir}/tmpl/*.tmpl -t ${pkgdir}/ubos/share/${pkgname}/tmpl/
+
+# Data
+    mkdir -p ${pkgdir}/ubos/lib/${pkgname}
+
+# Source
+    mkdir -p ${pkgdir}/ubos/share/${pkgname}
+    cp -a ${startdir}/src/matomo/* ${pkgdir}/ubos/share/${pkgname}
+
+# Cache
+#    mkdir -p ${pkgdir}/var/cache/${pkgname}
+}
