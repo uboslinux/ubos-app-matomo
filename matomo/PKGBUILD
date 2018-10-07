@@ -27,10 +27,13 @@ package() {
    install -D -m755 ${startdir}/bin/*.pl -t ${pkgdir}/ubos/share/${pkgname}/bin/
 
 # Templates
-#   install -D -m644 ${startdir}/tmpl/*.tmpl -t ${pkgdir}/ubos/share/${pkgname}/tmpl/
+   install -D -m644 ${startdir}/tmpl/*.tmpl -t ${pkgdir}/ubos/share/${pkgname}/tmpl/
 
 # Data
     mkdir -p ${pkgdir}/ubos/lib/${pkgname}
+
+# Cache
+    mkdir -p ${pkgdir}/var/cache
 
 # Source
     mkdir -p ${pkgdir}/ubos/share/${pkgname}

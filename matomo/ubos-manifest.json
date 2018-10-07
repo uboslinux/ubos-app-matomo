@@ -15,7 +15,7 @@
             "phpmodules" : [
                 "gd",
                 "iconv",
-                "mysqli"
+                "pdo_mysql"
             ],
             "appconfigitems" : [
                 {
@@ -52,10 +52,28 @@
                     "name" : "${appconfig.datadir}"
                 },
                 {
+                    "type" : "directory",
+                    "name" : "${appconfig.cachedir}"
+                },
+                {
                     "type"  : "directory",
-                    "name"  : "tmp",
+                    "names"  : [
+                        "${appconfig.cachedir}/tmp",
+                        "${appconfig.cachedir}/tmp/cache"
+                    ],
                     "uname" : "${apache2.uname}",
                     "gname" : "${apache2.gname}"
+                },
+                {
+                    "type"   : "symlink",
+                    "name"   : "tmp",
+                    "source" : "${appconfig.cachedir}/tmp"
+                },
+                {
+                    "type"         : "file",
+                    "name"         : "${appconfig.apache2.appconfigfragmentfile}",
+                    "template"     : "tmpl/htaccess.tmpl",
+                    "templatelang" : "varsubst"
                 },
                 {
                     "type"   : "perlscript",
@@ -102,5 +120,3 @@
         }
     }
 }
-
-

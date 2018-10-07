@@ -14,6 +14,7 @@ my $ret = 1;
 
 if( 'install' eq $operation ) {
     my $appConfigDir = $config->getResolveOrNull( 'appconfig.apache2.dir' );
+    my $appConfigId  = $config->getResolveOrNull( 'appconfig.appconfigid' );
     my $adminUser    = $config->getResolveOrNull( 'site.admin.userid' );
     my $adminPass    = $config->getResolveOrNull( 'site.admin.credential' );
     my $adminEmail   = $config->getResolveOrNull( 'site.admin.email' );
@@ -29,7 +30,7 @@ if( 'install' eq $operation ) {
     $cmd .= " TERM=vt100";
     $cmd .= " sudo -u " . $apache2User;
     $cmd .= " php";
-    $cmd .= " -d open_basedir='$appConfigDir:/ubos/share/:/tmp'";
+    $cmd .= " -d open_basedir='$appConfigDir:/var/cache/$appConfigId:/tmp'";
 
     # Taken mostly from plugins/Installation/Controller.php
     # and https://raw.githubusercontent.com/nebev/piwik-cli-setup/master/install.php
@@ -109,21 +110,13 @@ Access::doAsSuperUser(function () use ($config_arr) {
 PHP
 
     $php .= <<PHP;
-    return APISitesManager::getInstance()->addSite( '$hostname', '$hostProto', 0);
+    return APISitesManager::getInstance()->addSite( 'dummy', 'http', 0);
 PHP
     $php .= <<'PHP';
 });
 
-print( "** loadPluginTranslations()\n" );
-Manager::getInstance()->loadPluginTranslations();
-print( "** loadActivatedPlugins()\n" );
-Manager::getInstance()->loadActivatedPlugins();
-print( "** installLoadedPlugins()\n" );
-Manager::getInstance()->installLoadedPlugins();
-
-// Put in Activated plugins
-print( "** loadActivatedPlugins()\n" );
-Manager::getInstance()->loadActivatedPlugins();
+print( "** loadAllPluginsAndGetTheirInfo()\n" );
+Manager::getInstance()->loadAllPluginsAndGetTheirInfo();
 PHP
 
     my $out = '';
