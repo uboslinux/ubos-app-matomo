@@ -15,6 +15,7 @@
             "phpmodules" : [
                 "gd",
                 "iconv",
+                "mysqli",
                 "pdo_mysql"
             ],
             "appconfigitems" : [
