@@ -8,7 +8,7 @@ pkgdesc="Analytics platform"
 arch=('any')
 license=("GPL3")
 source=("https://builds.piwik.org/matomo-${pkgver}.tar.gz")
-releasepage=("https://builds.piwik.org/?C=M;O=D")
+releasepage=("https://builds.piwik.org/LATEST")
 depends=(
     'php'
 )
