@@ -2,7 +2,7 @@ developer=https://matomo.org/
 url=${developer}
 maintainer=http://indiecomputing.com/
 pkgname=$(basename $(pwd))
-pkgver=3.7.0
+pkgver=3.8.1
 pkgrel=1
 pkgdesc="Analytics platform"
 arch=('any')
@@ -13,7 +13,7 @@ depends=(
     'php'
 )
 options=('!strip')
-sha512sums=('3e0e95f8d38467f91a3e098fbcc54f18844e54f6afe855afd2ddf9ececb37c35ecfa6303e3e9ee8e19e91d92c246d806a0c9f719ecef04642716073c32f99986')
+sha512sums=('3c674f0ad9d6dcd4cadc270e298271cf3c0a6f69f4af275813b4b8916ddec9a6f67b218c192ed4ddc96a4ff7f542c6e213cb5b3a2208cf63b409944f43f339ad')
 
 package() {
 # Manifest

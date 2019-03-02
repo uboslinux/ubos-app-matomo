@@ -30,7 +30,7 @@ if( 'install' eq $operation ) {
     $cmd .= " TERM=vt100";
     $cmd .= " sudo -u " . $apache2User;
     $cmd .= " php";
-    $cmd .= " -d open_basedir='$appConfigDir:/var/cache/$appConfigId:/tmp'";
+    $cmd .= " -d open_basedir='$appConfigDir:/var/cache/$appConfigId:/tmp/:/ubos/tmp/'";
 
     # Taken mostly from plugins/Installation/Controller.php
     # and https://raw.githubusercontent.com/nebev/piwik-cli-setup/master/install.php

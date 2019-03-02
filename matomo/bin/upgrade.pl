@@ -21,7 +21,7 @@ if( 'install' eq $operation || 'upgrade' eq $operation ) {
     $cmd .= " TERM=vt100";
     $cmd .= " sudo -u " . $apache2User;
     $cmd .= " php";
-    $cmd .= " -d open_basedir='$appConfigDir:/var/cache/$appConfigId:/tmp'";
+    $cmd .= " -d open_basedir='$appConfigDir:/var/cache/$appConfigId:/tmp/:/ubos/tmp/'";
     $cmd .= " console core:update --yes";
 
     $cmd .= " -vvv";
