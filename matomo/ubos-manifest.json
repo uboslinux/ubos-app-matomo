@@ -36,6 +36,8 @@
                         "LEGALNOTICE",
                         "libs",
                         "LICENSE",
+                        "matomo.js",
+                        "matomo.php",
                         "misc",
                         "piwik.js",
                         "piwik.php",
