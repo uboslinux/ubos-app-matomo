@@ -74,15 +74,12 @@ try {
 $config = Config::getInstance();
 $config->init();
 
-print( "** createTables()\n" );
 DbHelper::createTables();
-print( "** createAnonymousUser()\n" );
 DbHelper::createAnonymousUser();
 
 Access::getInstance();
 
 Access::doAsSuperUser(function () {
-    print( "** updater\n" );
     $updater = new Updater();
     $componentsWithUpdateFile = $updater->getComponentUpdates();
 
@@ -93,7 +90,6 @@ Access::doAsSuperUser(function () {
 });
 
 Access::doAsSuperUser(function () use ($config_arr) {
-    print( "** users\n" );
     $api = APIUsersManager::getInstance();
 PHP
 
@@ -104,8 +100,6 @@ PHP
     $php .= <<'PHP';
 });
 
-    print( "** addPrimaryWebsite()\n" );
-
 Access::doAsSuperUser(function () use ($config_arr) {
 PHP
 
@@ -115,7 +109,6 @@ PHP
     $php .= <<'PHP';
 });
 
-print( "** loadAllPluginsAndGetTheirInfo()\n" );
 Manager::getInstance()->loadAllPluginsAndGetTheirInfo();
 PHP
 
@@ -127,7 +120,3 @@ PHP
 }
 
 $ret;
-
-
-
-
