@@ -7,7 +7,8 @@
             "depends" : [
                 "php",
                 "php-apache",
-                "php-gd"
+                "php-gd",
+                "smtp-server"
             ],
             "apache2modules" : [
                 "php7"
@@ -22,33 +23,38 @@
                 {
                     "type" : "directorytree",
                     "names" : [
-                        "bower.json",
-                        "CHANGELOG.md",
-                        "composer.json",
-                        "composer.lock",
                         "config",
-                        "console",
-                        "CONTRIBUTING.md",
                         "core",
-                        "index.php",
                         "js",
                         "lang",
-                        "LEGALNOTICE",
                         "libs",
-                        "LICENSE",
-                        "matomo.js",
-                        "matomo.php",
                         "misc",
-                        "piwik.js",
-                        "piwik.php",
                         "plugins",
+                        "tests",
+                        "vendor",
+                        "CHANGELOG.md",
+                        "console",
+                        "CONTRIBUTING.md",
+                        "index.php",
+                        "LEGALNOTICE",
+                        "LICENSE",
+                        "matomo.php",
+                        "piwik.php",
                         "PRIVACY.md",
                         "README.md",
-                        "SECURITY.md",
-                        "tests",
-                        "vendor"
+                        "SECURITY.md"
                     ],
                     "source" : "$1",
+                },
+                {
+                    "type" : "directorytree",
+                    "names" : [
+                        "matomo.js",
+                        "piwik.js"
+                    ],
+                    "source" : "$1",
+                    "uname" : "${apache2.uname}",
+                    "gname" : "${apache2.gname}"
                 },
                 {
                     "type" : "directory",
@@ -81,6 +87,20 @@
                 {
                     "type"   : "perlscript",
                     "source" : "bin/generate-config.pl"
+                },
+                {
+                    "type"         : "file",
+                    "name"         : "/etc/systemd/system/matomo-archive@${appconfig.appconfigid}.service",
+                    "template"     : "tmpl/matomo-archive@.service.tmpl",
+                    "templatelang" : "varsubst"
+                },
+                {
+                    "type"         : "systemd-timer",
+                    "name"         : "matomo-archive@${appconfig.appconfigid}"
+                },
+                {
+                    "type" : "systemd-service",
+                    "name" : "smtp-server@${appconfig.appconfigid}"
                 }
             ],
             "installers" : [
@@ -117,6 +137,7 @@
             "type"        : "string",
             "required"    : false,
             "private"     : true,
+            "internal"    : true,
             "default" : {
                 "expression" : "${randomHex(32)}"
             }

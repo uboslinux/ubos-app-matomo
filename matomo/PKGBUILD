@@ -2,8 +2,8 @@ developer=https://matomo.org/
 url=${developer}
 maintainer=http://indiecomputing.com/
 pkgname=$(basename $(pwd))
-pkgver=3.10.0
-pkgrel=2
+pkgver=3.12.0
+pkgrel=1
 pkgdesc="Analytics platform"
 arch=('any')
 license=("GPL3")
@@ -13,7 +13,7 @@ depends=(
     'php'
 )
 options=('!strip')
-sha512sums=('5624fe43767899ce5cdc9f7f2e46ff31be1d932f2f4743ddb3b77256de67bfce4587bf80881b1524738ecd61186abe67d5e6afd5fd1eac348b3af076b5ea2afa')
+sha512sums=('3561624f6cafe17f0b5d04309f7d1e089e47cd8405e4dbab436da73768929480ad5efd1dddfa5a985e17fbde32b81fa6e9bb9a78b700ddb0f90dfcdc91141efb')
 
 package() {
 # Manifest
@@ -27,6 +27,9 @@ package() {
 
 # Templates
    install -D -m644 ${startdir}/tmpl/*.tmpl -t ${pkgdir}/ubos/share/${pkgname}/tmpl/
+
+# Systemd
+   install -D -m644 ${startdir}/systemd/* -t ${pkgdir}/usr/lib/systemd/system/
 
 # Data
     mkdir -p ${pkgdir}/ubos/lib/${pkgname}

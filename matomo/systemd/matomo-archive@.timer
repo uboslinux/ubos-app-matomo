@@ -1,0 +1,10 @@
+[Unit]
+Description=Run Matomo archive every 5 minutes (%i)
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=5min
+Unit=matomo-archive@%i.service
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,10 @@
+[Unit]
+Description=Matomo Archive (${appconfig.appconfigid})
+
+[Service]
+User=${apache2.uname}
+ExecStartPre=/usr/share/ubos-admin/bin/ubos-service-prestart matomo-archive@${appconfig.appconfigid}
+ExecStart=/usr/bin/php ${appconfig.apache2.dir}/console core:archive --url=${site.protocol}://${site.hostname}${appconfig.context}/
+
+[Install]
+WantedBy=basic.target
