@@ -19,7 +19,7 @@ if( 'deploy' eq $operation ) {
     my $dbUser       = $config->getResolveOrNull( 'appconfig.mysql.dbuser.maindb' );
     my $dbPass       = $config->getResolveOrNull( 'appconfig.mysql.dbusercredential.maindb' );
     my $dbName       = $config->getResolveOrNull( 'appconfig.mysql.dbname.maindb' );
-    my $dbHost       = $config->getResolveOrNull( 'appconfig.mysql.dbhost.maindb' );
+    my $dbHost       = '127.0.0.1'; # for now to avoid localhost # $config->getResolveOrNull( 'appconfig.mysql.dbhost.maindb' );
 
     my $salt         = $config->getResolveOrNull( 'installable.customizationpoints.salt.value' );
 
@@ -41,6 +41,12 @@ adapter = "MYSQLI"
 
 [General]
 salt = "$salt"
+enable_plugin_update_communication: false
+delete_logs_enable: true
+api_service_url:
+enable_installer: 0
+enable_internet_features: 0
+iwik_professional_support_ads_enabled: 0
 CONTENT
 
     if( '*' eq $hostname ) {
