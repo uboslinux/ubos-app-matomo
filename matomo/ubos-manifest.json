@@ -127,7 +127,7 @@
                     "name"       : "maindb",
                     "retentionpolicy"  : "keep",
                     "retentionbucket"  : "maindb",
-                    "privileges" : "index, create, select, insert, update, delete, alter, lock tables, drop"
+                    "privileges" : "index, create, create temporary tables, select, insert, update, delete, alter, lock tables, drop"
                 }
             ]
         }
