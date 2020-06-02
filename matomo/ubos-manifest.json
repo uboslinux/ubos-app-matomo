@@ -97,10 +97,6 @@
                 {
                     "type"         : "systemd-timer",
                     "name"         : "matomo-archive@${appconfig.appconfigid}"
-                },
-                {
-                    "type" : "systemd-service",
-                    "name" : "smtp-server@${appconfig.appconfigid}"
                 }
             ],
             "installers" : [

@@ -76,6 +76,7 @@ $config->init();
 
 DbHelper::createTables();
 DbHelper::createAnonymousUser();
+DbHelper::recordInstallVersion();
 
 Access::getInstance();
 
