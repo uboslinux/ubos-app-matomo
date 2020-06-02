@@ -2,8 +2,9 @@
 Description=Run Matomo archive every 5 minutes (%i)
 
 [Timer]
-OnBootSec=5min
-OnActiveSec=5min
+OnBootSec=10min
+OnActiveSec=10min
+OnUnitActiveSec=30min
 Unit=matomo-archive@%i.service
 
 [Install]
