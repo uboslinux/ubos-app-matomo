@@ -36,6 +36,7 @@
                         "console",
                         "CONTRIBUTING.md",
                         "index.php",
+                        "LegacyAutoloader.php",
                         "LEGALNOTICE",
                         "LICENSE",
                         "matomo.php",
