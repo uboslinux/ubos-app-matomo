@@ -72,7 +72,6 @@ try {
 } catch(\Exception $e) {}
 
 $config = Config::getInstance();
-$config->init();
 
 DbHelper::createTables();
 DbHelper::createAnonymousUser();
