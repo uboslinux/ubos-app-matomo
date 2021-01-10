@@ -1,8 +1,7 @@
 [Unit]
-Description=Run Matomo archive every 5 minutes (%i)
+Description=Run Matomo archive periodically (%i)
 
 [Timer]
-OnBootSec=10min
 OnActiveSec=10min
 OnUnitActiveSec=30min
 Unit=matomo-archive@%i.service
