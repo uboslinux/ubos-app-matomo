@@ -13,7 +13,7 @@ depends=(
     'php'
 )
 options=('!strip')
-sha512sums=('43f7d05ae4f2084d81f8c94c3046a89fabb40ee5563b09efaa29805558b51042547842cb543da5d042b409b0adcd865e486cf61af4a1c1b30ac298abc8bd48cd')
+sha512sums=('254921109b947efe6bd92d1baad5f7e037b34b5508e5617a7a8c26f4862444e14898a108c5afe7469020ae8f5bb189cfeb4c607debbbbfafb5bb23e63f02115a')
 
 package() {
 # Manifest
