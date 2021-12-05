@@ -13,7 +13,7 @@ use UBOS::Utils;
 
 my $ret = 1;
 
-if( 'deploy' eq $operation ) {
+if( 'install' eq $operation || 'upgrade' eq $operation ) {
     my $appConfigDir = $config->getResolveOrNull( 'appconfig.apache2.dir' );
     my $cacheDir     = $config->getResolveOrNull( 'appconfig.cachedir' );
     my $dbUser       = $config->getResolveOrNull( 'appconfig.mysql.dbuser.maindb' );
@@ -37,7 +37,7 @@ username = "$dbUser"
 password = "$dbPass"
 dbname = "$dbName"
 tables_prefix = "matomo_"
-adapter = "MYSQLI"
+charset = "utf8mb4"
 
 [General]
 salt = "$salt"
@@ -49,6 +49,12 @@ enable_internet_features: 0
 iwik_professional_support_ads_enabled: 0
 CONTENT
 
+    if( 'install' eq $operation ) {
+        $content .= <<CONTENT;
+installation_in_progress = 1
+CONTENT
+    }
+
     if( '*' eq $hostname ) {
         $content .= <<CONTENT;
 enable_trusted_host_check=0
@@ -59,9 +65,9 @@ trusted_hosts[] = "$hostname"
 CONTENT
     }
 
-
     UBOS::Utils::saveFile( "$appConfigDir/config/config.ini.php", $content, 0600, $apache2User, $apache2Group );
 }
+
 if( 'undeploy' eq $operation ) {
     my $appConfigDir = $config->getResolveOrNull( 'appconfig.apache2.dir' );
 

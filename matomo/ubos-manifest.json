@@ -91,10 +91,6 @@
                     "templatelang" : "varsubst"
                 },
                 {
-                    "type"   : "perlscript",
-                    "source" : "bin/generate-config.pl"
-                },
-                {
                     "type"         : "file",
                     "name"         : "/etc/systemd/system/matomo-archive@${appconfig.appconfigid}.service",
                     "template"     : "tmpl/matomo-archive@.service.tmpl",
@@ -108,14 +104,24 @@
             "installers" : [
                 {
                     "type"   : "perlscript",
-                    "source" : "bin/init-db.pl"
+                    "source" : "bin/generate-config.pl"
                 },
                 {
                     "type"   : "perlscript",
-                    "source" : "bin/upgrade.pl"
+                    "source" : "bin/setup.pl",
+                    "phase"  : "resume"
+                },
+                {
+                    "type"   : "perlscript",
+                    "source" : "bin/upgrade.pl",
+                    "phase"  : "resume"
                 }
             ],
             "upgraders" : [
+                {
+                    "type"   : "perlscript",
+                    "source" : "bin/generate-config.pl"
+                },
                 {
                     "type"   : "perlscript",
                     "source" : "bin/upgrade.pl"
