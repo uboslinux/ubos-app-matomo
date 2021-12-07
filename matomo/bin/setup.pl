@@ -33,13 +33,13 @@ if( 'install' eq $operation ) {
 
     my @cmds = (
         # We don't do:
-        #     "curl --fail -X POST '$fullContext/index.php?action=databaseSetup&clientProtocol=http' --data 'type=InnoDB&host=$dbHost&username=$dbUser&password=$dbPass&dbname=$dbName&tables_prefix=matomo_&adapter=PDO%5CMYSQL&submit=Next+%C2%BB'"
+        #     "curl --insecure --fail -X POST '$fullContext/index.php?action=databaseSetup&clientProtocol=http' --data 'type=InnoDB&host=$dbHost&username=$dbUser&password=$dbPass&dbname=$dbName&tables_prefix=matomo_&adapter=PDO%5CMYSQL&submit=Next+%C2%BB'"
         # because this will only create the config file, and we did that already
 
-        "curl --fail '$fullContext/index.php?action=tablesCreation&clientProtocol=http&module=Installation'",
-        "curl --fail -X POST '$fullContext/index.php?action=setupSuperUser&clientProtocol=http&module=Installation' --data 'login=$adminUser&password=$adminPass&password_bis=$adminPass&email=$adminEmail&submit=Next+%C2%BB'",
-        "curl --fail -X POST '$fullContext/index.php?action=firstWebsiteSetup&clientProtocol=http&module=Installation' --data 'siteName=Dummy&url=https%3A%2F%2Fwww.example.com%2F&timezone=UTC&ecommerce=0&submit=Next+%C2%BB'",
-        "curl --fail -X POST '$fullContext/index.php?action=finished&clientProtocol=http&module=Installation&site_idSite=1&site_name=Dummy' --data 'setup_geoip2=1&do_not_track=1&anonymise_ip=1&submit=Continue+to+Matomo+%C2%BB'"
+        "curl --insecure --fail '$fullContext/index.php?action=tablesCreation&clientProtocol=http&module=Installation'",
+        "curl --insecure --fail -X POST '$fullContext/index.php?action=setupSuperUser&clientProtocol=http&module=Installation' --data 'login=$adminUser&password=$adminPass&password_bis=$adminPass&email=$adminEmail&submit=Next+%C2%BB'",
+        "curl --insecure --fail -X POST '$fullContext/index.php?action=firstWebsiteSetup&clientProtocol=http&module=Installation' --data 'siteName=Dummy&url=https%3A%2F%2Fwww.example.com%2F&timezone=UTC&ecommerce=0&submit=Next+%C2%BB'",
+        "curl --insecure --fail -X POST '$fullContext/index.php?action=finished&clientProtocol=http&module=Installation&site_idSite=1&site_name=Dummy' --data 'setup_geoip2=1&do_not_track=1&anonymise_ip=1&submit=Continue+to+Matomo+%C2%BB'"
     );
 
     my $out = '';
